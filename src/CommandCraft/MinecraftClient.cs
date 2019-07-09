@@ -69,8 +69,7 @@ namespace CommandCraft
         /// </summary>
         /// <param name="command">command</param>
         /// <returns></returns>
-        public Task<string> ExecuteAsync<T>(T command)
-            where T : struct, IMinecraftCommand
+        public Task<string> ExecuteAsync(MinecraftCommand command)
             => this.ExecuteAsync(command.Build());
         #endregion
     }
