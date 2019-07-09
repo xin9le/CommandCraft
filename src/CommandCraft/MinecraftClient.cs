@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using CommandCraft.Commands;
 using CoreRCON;
 
 
@@ -61,6 +62,16 @@ namespace CommandCraft
                 throw new ArgumentNullException(nameof(command));
             return this.Connection.SendCommandAsync(command);
         }
+
+
+        /// <summary>
+        /// Execute defined command.
+        /// </summary>
+        /// <param name="command">command</param>
+        /// <returns></returns>
+        public Task<string> ExecuteAsync<T>(T command)
+            where T : struct, IMinecraftCommand
+            => this.ExecuteAsync(command.Build());
         #endregion
     }
 }
