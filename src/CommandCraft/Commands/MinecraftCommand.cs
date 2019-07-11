@@ -5,18 +5,32 @@
     /// </summary>
     public abstract class MinecraftCommand
     {
+        #region Properties
+        /// <summary>
+        /// Gets built command string.
+        /// </summary>
+        internal string BuiltString
+            => this.builtString ??= this.Build();
+        private string builtString;
+        #endregion
+
+
+        #region Abstracts
         /// <summary>
         /// Build command string.
         /// </summary>
         /// <returns></returns>
-        protected internal abstract string Build();
+        protected abstract string Build();
+        #endregion
 
 
+        #region Overrides
         /// <summary>
         /// Convert to string.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
-            => this.Build();
+            => this.BuiltString;
+        #endregion
     }
 }

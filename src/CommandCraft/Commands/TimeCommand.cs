@@ -30,7 +30,7 @@ namespace CommandCraft.Commands
 
 
         #region Overrides
-        protected internal override string Build()
+        protected override string Build()
             => $"/time set {this.Amount}";
         #endregion
     }
