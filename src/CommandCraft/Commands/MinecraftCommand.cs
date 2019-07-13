@@ -3,6 +3,7 @@
     /// <summary>
     /// Represents basis of Minecraft command.
     /// </summary>
+    /// <remarks>https://minecraft.gamepedia.com/Commands</remarks>
     public abstract class MinecraftCommand
     {
         #region Properties
