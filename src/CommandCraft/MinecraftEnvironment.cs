@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents runtime environment of Minecraft server.
     /// </summary>
-    internal sealed class MinecraftEnvironment
+    public sealed class MinecraftEnvironment
     {
         #region Properties
         /// <summary>

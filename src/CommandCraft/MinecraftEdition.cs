@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents edition of Minecraft.
     /// </summary>
-    internal enum MinecraftEdition
+    public enum MinecraftEdition
     {
         Java = 0,
         Bedrock,
