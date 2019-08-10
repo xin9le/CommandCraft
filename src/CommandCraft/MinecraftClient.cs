@@ -18,6 +18,13 @@ namespace CommandCraft
         /// Gets RCON connection.
         /// </summary>
         private RCON Connection { get; }
+
+
+        /// <summary>
+        /// Gets runtime environment of Minecraft.
+        /// This is reserved for the future.
+        /// </summary>
+        private MinecraftEnvironment Environment { get; } = new MinecraftEnvironment(MinecraftEdition.Java, MinecraftVersion.Latest);
         #endregion
 
 
