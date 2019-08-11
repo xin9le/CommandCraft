@@ -42,6 +42,7 @@ namespace CommandCraft.Commands
         /// <param name="mode"></param>
         /// <param name="selector"></param>
         public GameModeCommand(GameMode mode, TargetSelector selector)
+            : this(mode)
             => this.Selector = selector ?? throw new ArgumentNullException(nameof(selector));
         #endregion
 
