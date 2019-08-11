@@ -39,6 +39,11 @@ namespace CommandCraft.Commands
 
 
         #region Overrides
+        /// <summary>
+        /// Build command string.
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="environment"></param>
         protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
             builder.Append("/time set ");
