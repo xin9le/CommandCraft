@@ -1,4 +1,8 @@
-﻿namespace CommandCraft.Commands
+﻿using System.Text;
+
+
+
+namespace CommandCraft.Commands
 {
     /// <summary>
     /// Represents absolute or relative position.
@@ -25,16 +29,6 @@
         #endregion
 
 
-        #region Overrides
-        /// <summary>
-        /// Converts to string.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-            => this.Build();
-        #endregion
-
-
         #region Operators
         /// <summary>
         /// Converts to <see cref="Position"/> from <seealso cref="double"/> implicitly.
@@ -49,9 +43,14 @@
         /// <summary>
         /// Build command string.
         /// </summary>
-        /// <returns></returns>
-        internal string Build()
-            => this.IsRelative ? $"^{this.Value}" : this.Value.ToString();
+        /// <param name="builder"></param>
+        /// <param name="environment"></param>
+        internal void Build(StringBuilder builder, MinecraftEnvironment environment)
+        {
+            if (this.IsRelative)
+                builder.Append('^');
+            builder.Append(this.Value);
+        }
         #endregion
     }
 }

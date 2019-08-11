@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Text;
 
 
 
 namespace CommandCraft.Commands
 {
     /// <summary>
-    /// Provides '/time set' command. 
+    /// Provides '/time set' command.
     /// </summary>
     public sealed class TimeSetCommand : MinecraftCommand
     {
@@ -15,6 +16,10 @@ namespace CommandCraft.Commands
 
 
         #region Constructors
+        /// <summary>
+        /// Creates instance.
+        /// </summary>
+        /// <param name="amount"></param>
         public TimeSetCommand(int amount)
         {
             if (amount < 0)
@@ -23,6 +28,10 @@ namespace CommandCraft.Commands
         }
 
 
+        /// <summary>
+        /// Creates instance.
+        /// </summary>
+        /// <param name="time"></param>
         public TimeSetCommand(SpecificTime time)
             : this((int)time)
         {}
@@ -30,10 +39,14 @@ namespace CommandCraft.Commands
 
 
         #region Overrides
-        protected override string Build()
-            => $"/time set {this.Amount}";
+        protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
+        {
+            builder.Append("/time set ");
+            builder.Append(this.Amount);
+        }
         #endregion
     }
+
 
 
     /// <summary>

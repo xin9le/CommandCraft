@@ -14,7 +14,6 @@ namespace CommandCraft.Commands
         #region Properties
         private TargetAt At { get; }
         private IReadOnlyCollection<TargetFilter> Filters { get; }
-        private string BuiltString { get; set; }
         #endregion
 
 
@@ -42,50 +41,31 @@ namespace CommandCraft.Commands
         #endregion
 
 
-        #region Abstracts
+        #region Build
         /// <summary>
-        /// Build target selector string.
+        /// Build command string.
         /// </summary>
-        /// <returns></returns>
-        internal string Build()
+        /// <param name="builder"></param>
+        /// <param name="environment"></param>
+        internal void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
-            //--- If cache exists
-            if (this.BuiltString != null)
-                return this.BuiltString;
-
-            //--- Calculate filters
             var at = this.At.ToCommandString();
+            builder.Append(at);
             if (this.Filters.Count <= 0)
+                return;
+
+            var isFirst = true;
+            builder.Append('[');
+            foreach (var x in this.Filters)
             {
-                this.BuiltString = at;
+                if (!isFirst)
+                    builder.Append(',');
+
+                x.Build(builder, environment);
+                isFirst = false;
             }
-            else
-            {
-                var isFirst = true;
-                var builder = new StringBuilder(at);
-                builder.Append('[');
-                foreach (var x in this.Filters)
-                {
-                    if (!isFirst)
-                        builder.Append(',');
-                    builder.Append(x.BuiltString);
-                    isFirst = false;
-                }
-                builder.Append(']');
-                this.BuiltString = builder.ToString();
-            }
-            return this.BuiltString;
+            builder.Append(']');
         }
-        #endregion
-
-
-        #region Overrides
-        /// <summary>
-        /// Convert to string.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-            => this.Build();
         #endregion
     }
 }

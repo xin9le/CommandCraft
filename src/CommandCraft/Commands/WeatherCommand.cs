@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 
 
@@ -17,7 +18,7 @@ namespace CommandCraft.Commands
 
         #region Constructors
         /// <summary>
-        /// 
+        /// Creates instance.
         /// </summary>
         /// <param name="weather"></param>
         /// <param name="duration">duration [sec]</param>
@@ -33,7 +34,7 @@ namespace CommandCraft.Commands
 
 
         #region Overrides
-        protected override string Build()
+        protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
             var weather = this.Weather switch
             {
@@ -42,9 +43,14 @@ namespace CommandCraft.Commands
                 Weather.Thunder => "thunder",
                 _ => throw new InvalidOperationException(),
             };
-            return this.Duration.HasValue
-                ? $"/weather {weather} {this.Duration.Value}"
-                : $"/weather {weather}";
+
+            builder.Append("/weather ");
+            builder.Append(weather);
+            if (this.Duration.HasValue)
+            {
+                builder.Append(' ');
+                builder.Append(this.Duration.Value);
+            }
         }
         #endregion
     }

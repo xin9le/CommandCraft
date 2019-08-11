@@ -77,7 +77,12 @@ namespace CommandCraft
         /// <param name="command">command</param>
         /// <returns></returns>
         public Task<string> ExecuteAsync(MinecraftCommand command)
-            => this.ExecuteAsync(command.BuiltString);
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+            var builtString = command.Build(this.Environment);
+            return this.ExecuteAsync(builtString);
+        }
         #endregion
     }
 }

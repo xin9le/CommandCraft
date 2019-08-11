@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 
 
@@ -33,8 +34,9 @@ namespace CommandCraft.Commands
         /// <summary>
         /// Build command string.
         /// </summary>
-        /// <returns></returns>
-        protected override string Build()
+        /// <param name="builder"></param>
+        /// <param name="environment"></param>
+        internal protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
             var axis = this.Axis switch
             {
@@ -43,7 +45,9 @@ namespace CommandCraft.Commands
                 Axis.Z => 'z',
                 _ => throw new InvalidOperationException(),
             };
-            return $"{axis}={this.Position.Build()}";
+            builder.Append(axis);
+            builder.Append('=');
+            this.Position.Build(builder, environment);
         }
         #endregion
     }

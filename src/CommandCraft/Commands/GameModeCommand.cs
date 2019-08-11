@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Text;
 
 
 
 namespace CommandCraft.Commands
 {
     /// <summary>
-    /// Provides '/gamemode' command. 
+    /// Provides '/gamemode' command.
     /// </summary>
     public sealed class GameModeCommand : MinecraftCommand
     {
@@ -46,17 +47,21 @@ namespace CommandCraft.Commands
 
 
         #region Overrides
-        /// <summary>
-        /// Build command string.
-        /// </summary>
-        /// <returns></returns>
-        protected override string Build()
+        protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
             var mode = (int)this.Mode;
-            var selector = this.Player ?? this.Selector?.Build();
-            return selector == null
-                ? $"/gamemode {mode}"
-                : $"/gamemode {mode} {selector}";
+            builder.Append("/gamemode ");
+            builder.Append(mode);
+            if (this.Player != null)
+            {
+                builder.Append(' ');
+                builder.Append(this.Player);
+            }
+            else if (this.Selector != null)
+            {
+                builder.Append(' ');
+                this.Selector.Build(builder, environment);
+            }
         }
         #endregion
     }
