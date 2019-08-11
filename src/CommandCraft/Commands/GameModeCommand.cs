@@ -50,9 +50,8 @@ namespace CommandCraft.Commands
         #region Overrides
         protected override void Build(StringBuilder builder, MinecraftEnvironment environment)
         {
-            var mode = (int)this.Mode;
             builder.Append("/gamemode ");
-            builder.Append(mode);
+            builder.Append(this.Mode.ToCommandString());
             if (this.Player != null)
             {
                 builder.Append(' ');
@@ -65,18 +64,5 @@ namespace CommandCraft.Commands
             }
         }
         #endregion
-    }
-
-
-
-    /// <summary>
-    /// Represents game mode.
-    /// </summary>
-    public enum GameMode
-    {
-        Survival = 0,
-        Creative = 1,
-        Adventure = 2,
-        Spectator = 3,
     }
 }
